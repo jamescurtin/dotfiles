@@ -1,0 +1,77 @@
+[user]
+	name = James Curtin
+	email = jameswcurtin@gmail.com
+[push]
+        default=simple
+[color]
+	ui = auto
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+[gitflow "prefix"]
+	feature = feature-
+	release = release-
+	hotfix = hotfix-
+	support = support-
+	versiontag = v
+[url "git@github.com"]
+        insteadOf = gh:
+[alias]
+	a = add --all
+	#############
+	b = branch
+	ba = branch -a
+	#############
+	c = commit
+	cm = commit -m
+	#############
+	cl = clone
+	#############
+	cp = cherry-pick
+	#############
+	d = diff
+	#############
+	f = fetch
+	fo = fetch origin
+	fu = fetch upstream
+	#############
+	fk = fsck
+	#############
+	g = grep -p
+	#############
+	l = log --oneline
+	lg = log --oneline --graph --decorate
+	#############
+	ls = ls-files
+	lsf = !git ls-files | grep -i
+	#############
+	m = merge
+	ma = merge --abort
+	mc = merge --continue
+	ms = merge --skip
+	#############
+	o = checkout
+	ob = checkout -b
+	#############
+	ps = push
+	psf = push -force-with-lease
+	#############
+	pl = pull
+	#############
+	rbi = rebase --interactive
+	#############
+	s = status
+	sb = status -s -b
+	#############
+	aliases = !git config -l | grep alias | cut -c 7-
