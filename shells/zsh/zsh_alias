@@ -1,0 +1,7 @@
+alias c='clear'
+alias cd..='cd ..'
+alias grep='grep -n'
+alias ll='ls -laghFG'
+alias mkdir='mkdir -pv'
+alias path='echo -e ${PATH//:/\\n}'
+alias reload='source ~/.zshrc'
