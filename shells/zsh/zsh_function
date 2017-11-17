@@ -1,6 +1,8 @@
+activate_tmux() {
 if [[ -n $SSH_CONNECTION ]] && [ -z ${TMUX+x} ]; then
     tmux attach -t main || tmux new -s main
 fi
+}
 
 
 ssh_jupyter() {
