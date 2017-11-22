@@ -1,0 +1,5 @@
+- link:
+    ~/.zshrc: shells/zsh/zshrc
+    ~/.oh-my-zsh/custom/zsh_function.zsh: shells/zsh/zsh_function
+    ~/.oh-my-zsh/custom/zsh_alias.zsh: shells/zsh/zsh_alias
+
