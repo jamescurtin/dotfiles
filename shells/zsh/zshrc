@@ -49,12 +49,16 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  docker-compose
+  brew
   docker
-  tmux
-  pip
+  docker-compose
+  git
   git-flow
+  gpg-agent
+  osx
+  pip
+  sudo
+  tmux
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -79,4 +83,7 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+powerline-daemon -q
+powerline_zsh=$(pip show powerline-status | sed -n -e 's/^.*Location: //p')/powerline/bindings/zsh/powerline.zsh
+. $powerline_zsh
 activate_tmux

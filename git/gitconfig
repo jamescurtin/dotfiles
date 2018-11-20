@@ -2,9 +2,9 @@
 	name = James Curtin
 	email = jameswcurtin@gmail.com
 [push]
-        default=simple
+	default = current
 [color]
-	ui = auto
+	ui = true
 [color "branch"]
 	current = yellow bold
 	local = green bold
@@ -75,3 +75,16 @@
 	sb = status -s -b
 	#############
 	aliases = !git config -l | grep alias | cut -c 7-
+[core]
+	autocrlf = false
+	preloadindex = true
+	fscache = true
+	symlinks = false
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[log]
+	decorate = short
+[http]
+	sslVerify = false
