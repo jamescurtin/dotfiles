@@ -1,6 +1,7 @@
 [user]
 	name = James Curtin
 	email = jameswcurtin@gmail.com
+	signingkey = 6BE9E71D20EA9787
 [push]
 	default = current
 [color]
