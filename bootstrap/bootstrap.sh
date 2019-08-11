@@ -141,3 +141,5 @@ configure_gpg_public_keys
 configure_local_gitconfig
 
 print_exit_success
+
+return

@@ -18,9 +18,9 @@ add_yubikey () {
     }
 
 configure_local_gitconfig () {
-    bootstrap_echo "Configuring local gitconfig options"
-    if [[ ! -f "${HOME}/.git/gitconfig.local" ]]; then
-        touch "${HOME}/.git/gitconfig.local"
+    bootstrap_echo "Configuring local gitconfig options. This information will be used associated with your git commits."
+    if [[ ! -f "${HOME}/.gitconfig.local" ]]; then
+        touch "${HOME}/.gitconfig.local"
         prompt_local_gitconfig
     else
         echo "Local gitconfig already exists. Do you want to overwrite it?"
@@ -67,7 +67,7 @@ prompt_local_gitconfig() {
     name = %s
     email = %s
     signingkey = %s
-" "${NAME}" "${EMAIL}" "${SIGNING_KEY_ID:-$KEYID}" > "${HOME}"/.git/gitconfig.local
+" "${NAME}" "${EMAIL}" "${SIGNING_KEY_ID:-$KEYID}" > "${HOME}"/.gitconfig.local
 
     printf "\e[92mSuccess!\n\n\e[0m"
 }
