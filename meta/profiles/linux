@@ -1,5 +1,7 @@
 bash
 git
+gpg.linux
 tmux
 vim
+vscode.linux
 zsh

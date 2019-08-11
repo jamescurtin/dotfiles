@@ -5,7 +5,11 @@
 
 - clean: [
     '~',
-    '~/.config'
+    '~/.config',
+    '~/.gnupg',
+    '~/.hammerspoon',
+    '~/.iterm2',
+    '~/.oh-my-zsh'
 ]
 
 - shell:

@@ -68,4 +68,5 @@
     "yaml.format.proseWrap": "always",
     "yaml.completion": false,
     "gitlens.advanced.blame.delayAfterEdit": 50000,
+    "terminal.integrated.shell.osx": "/bin/zsh",
 }

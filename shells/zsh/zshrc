@@ -57,31 +57,21 @@ plugins=(
   gpg-agent
   osx
   pip
+  python
+  ssh-agent
   sudo
   tmux
+  vscode
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
+export GOPATH="${HOME}/.go"
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 powerline-daemon -q
 powerline_zsh=$(pip show powerline-status | sed -n -e 's/^.*Location: //p')/powerline/bindings/zsh/powerline.zsh

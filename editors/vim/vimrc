@@ -27,10 +27,6 @@ set splitright           " Create new horizontal windows to the right
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 02. Events                                                                 "
-" Initiate pathogen before enabling filetype detection
-call pathogen#infect()
-call pathogen#helptags()
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 
