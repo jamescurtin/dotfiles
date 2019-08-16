@@ -4,7 +4,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release"
+tap "microsoft/mssql-release"
 
 
 brew "bk"
