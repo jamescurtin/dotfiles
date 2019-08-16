@@ -5,7 +5,7 @@ set -eo pipefail
 printf "Preparing to download dotfiles repo...\n\n"
 if [[ ! -d "${HOME}/repos/dotfiles" ]]; then
     mkdir -p ~/repos
-    git clone https://github.com/jamescurtin/dotfiles.git ~/repos/dotfiles
+    git clone --recursive https://github.com/jamescurtin/dotfiles.git ~/repos/dotfiles
     printf "Dotfiles repo installed!\n\n"
 else
     printf "Dotfiles repo was already installed!\n\n"
@@ -48,10 +48,15 @@ printf "\e[92mSuccess!\n\n\e[0m"
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 
-bootstrap_echo "The computer will now attempt to update its software. If an update is
-available, it will be installed and \e[38;5;178myou cannot stop the process.\e[0m This may take a while."
-wait_for_user
-sudo softwareupdate -i -a --restart
+bootstrap_echo "Should the computer attempt to update its software? If an update is
+available, it will be installed and \e[38;5;178myou cannot stop the process.\e[0m It may take a while."
+echo "Do you want to check for updates?"
+select yn in Yes No; do
+    case $yn in
+        Yes ) sudo softwareupdate -i -a --restart; break;;
+        No ) printf "Skipping.\n\n"; break;;
+    esac
+done
 
 
 bootstrap_echo "Preparing to install Homebrew 🍺"
@@ -63,8 +68,26 @@ echo_install_status "Homebrew" "${HOMEBREW_INSTALLED:-0}"
 
 
 bootstrap_echo "Preparing to install brew packages."
-brew bundle
+brew bundle --file=Brewfile.base
 echo
+
+bootstrap_echo "Should the 'work' brew profile be installed?"
+echo
+select yn in Yes No; do
+    case $yn in
+        Yes ) brew bundle --file=Brewfile.work; echo; break;;
+        No ) printf "Skipping.\n\n"; break;;
+    esac
+done
+
+bootstrap_echo "Should the 'personal' brew profile be installed?"
+echo
+select yn in Yes No; do
+    case $yn in
+        Yes ) brew bundle --file=Brewfile.personal; echo; break;;
+        No ) printf "Skipping.\n\n"; break;;
+    esac
+done
 
 
 bootstrap_echo "Preparing to install oh-my-zsh"

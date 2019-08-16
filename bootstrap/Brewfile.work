@@ -1,0 +1,21 @@
+tap "caskroom/cask"
+tap "caskroom/versions"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release"
+
+
+brew "bk"
+brew "buildkite-agent"
+brew "freetds"
+brew "graphviz"
+brew "msodbcsql17"
+brew "mssql-tools"
+brew "openblas"
+brew "openldap"
+brew "r"
+brew "kubernetes-helm"
+
+cask "dbeaver-community"

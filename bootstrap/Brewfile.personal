@@ -1,0 +1,17 @@
+tap "caskroom/cask"
+tap "caskroom/versions"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "homebrew/services"
+
+cask "calibre"
+cask "dropbox"
+cask "teamviewer"
+cask "vlc"
+cask "webtorrent"
+
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "PDF Squeezer", id: 504700302
+mas "Pixelmator", id: 407963104
+mas "TNEF's Enough", id: 986621173
