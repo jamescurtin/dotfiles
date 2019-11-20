@@ -4,10 +4,11 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "microsoft/mssql-release"
+tap "buildkite/cli"
 
 
 brew "bk"
-brew "buildkite-agent"
+brew "buildkite/buildkite"
 brew "freetds"
 brew "graphviz"
 brew "msodbcsql17"
