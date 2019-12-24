@@ -7,6 +7,7 @@ source messages.sh
 add_yubikey () {
     printf "Starting ssh-agent\n"
     eval "$(ssh-agent -s)" &>/dev/null
+    mkdir -p "${HOME}"/.ssh
     if [[ ! -f "${HOME}/.ssh/id_rsa_yubikey.pub" ]]; then
         printf "Creating ~/.ssh/id_rsa_yubikey.pub\n\n"
         ssh-add -L | grep "cardno:" > ~/.ssh/id_rsa_yubikey.pub

@@ -17,7 +17,7 @@ To run as a one-liner:
 $ curl -O https://raw.githubusercontent.com/jamescurtin/dotfiles/master/bootstrap/bootstrap.sh && bash bootstrap.sh && rm bootstrap.sh
 ```
 
-## Installation
+## Dotfile Installation
 
 Clone the repo recursively:
 
@@ -37,8 +37,3 @@ $ cd ~/repos/dotfiles
 ```bash
 $ ./test.sh
 ```
-
-## TODOs
-
-* Dropbox symlinks
-* Better VS Code dotfiles
