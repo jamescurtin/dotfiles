@@ -1,2 +1,3 @@
 - link:
     ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.mac
+    ~/.gnupg/gpg.conf: gpg/gpg
