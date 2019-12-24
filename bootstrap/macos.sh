@@ -3,10 +3,10 @@ set -eo pipefail
 
 setup_macos_dock () {
     dockutil --no-restart --remove all
-    dockutil --no-restart --add "/Applications/Calendar.app"
-    dockutil --no-restart --add "/Applications/Messages.app"
+    dockutil --no-restart --add "/System/Applications/Calendar.app"
+    dockutil --no-restart --add "/System/Applications/Messages.app"
     dockutil --no-restart --add "/Applications/Google Chrome.app"
-    dockutil --no-restart --add "/Applications/System Preferences.app"
+    dockutil --no-restart --add "/System/Applications/System Preferences.app"
     dockutil --no-restart --add "/Applications/iTerm.app"
     dockutil --no-restart --add "/Applications/Spotify.app"
     dockutil --no-restart --add "/Applications/Sourcetree.app"
@@ -58,9 +58,6 @@ setup_macos_preferences() {
     # Finder: show path bar
     defaults write com.apple.finder ShowPathbar -bool true
 
-    # Display full POSIX path as Finder window title
-    defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-
     # Use column view in all Finder windows by default
     defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
@@ -94,4 +91,27 @@ setup_macos_preferences() {
 
     # Set strict firewall
     sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 2
+
+    # Expand save panel by default
+    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+    # Expand print panel by default
+    defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+    defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+    # Reveal IP address, hostname, OS version, etc. when clicking the clock
+    # in the login window
+    sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+
+    # Don’t show recent applications in Dock
+    defaults write com.apple.dock show-recents -bool false
+
+
+    # Set machine sleep to 3 minutes on power
+    sudo pmset -c sleep 3
+
+    # Set machine sleep to 2 minutes on battery
+    sudo pmset -b sleep 2
 }
