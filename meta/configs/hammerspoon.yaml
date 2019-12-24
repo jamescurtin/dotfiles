@@ -1,4 +1,4 @@
 - link:
     ~/.hammerspoon/init.lua: automation/hammerspoon/init
     ~/.hammerspoon/apps.lua: automation/hammerspoon/apps
-    ~/.hammerspoon/grid.lua: automation/hammerspoon/grid
+    ~/.hammerspoon/Spoons/Lunette.spoon: automation/hammerspoon/Spoons/Lunette.spoon
