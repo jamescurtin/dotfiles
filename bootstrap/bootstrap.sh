@@ -68,14 +68,14 @@ echo_install_status "Homebrew" "${HOMEBREW_INSTALLED:-0}"
 
 
 bootstrap_echo "Preparing to install brew packages."
-brew bundle --file=Brewfile.base
+brew bundle --no-lock --file=Brewfile.base
 echo
 
 bootstrap_echo "Should the 'work' brew profile be installed?"
 echo
 select yn in Yes No; do
     case $yn in
-        Yes ) brew bundle --file=Brewfile.work; echo; break;;
+        Yes ) brew bundle --no-lock --file=Brewfile.work; echo; break;;
         No ) printf "Skipping.\n\n"; break;;
     esac
 done
@@ -84,7 +84,7 @@ bootstrap_echo "Should the 'personal' brew profile be installed?"
 echo
 select yn in Yes No; do
     case $yn in
-        Yes ) brew bundle --file=Brewfile.personal; echo; break;;
+        Yes ) brew bundle --no-lock --file=Brewfile.personal; echo; break;;
         No ) printf "Skipping.\n\n"; break;;
     esac
 done
