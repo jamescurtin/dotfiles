@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export SHELLCHECK_OPTS="-e SC2034 --shell=bash"
+export SHELLCHECK_OPTS="-x -e SC2034 --shell=bash"
 
 shebangregex="^#! */[^ ]*/(env *)?[abkz]*sh"
 
