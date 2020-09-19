@@ -4,13 +4,13 @@
       relink: true
 
 - clean: [
-    '~',
-    '~/.config',
-    '~/.gnupg',
-    '~/.hammerspoon',
-    '~/.iterm2',
-    '~/.oh-my-zsh'
+  "~",
+  "~/.config",
+  "~/.gnupg",
+  "~/.hammerspoon",
+  "~/.iterm2",
+  "~/.oh-my-zsh"
 ]
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+    - [git submodule update --init --recursive, Installing submodules]
