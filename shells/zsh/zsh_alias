@@ -1,7 +1,9 @@
 alias c='clear'
+alias cat='ccat'
 alias cd..='cd ..'
 alias dc="docker-compose"
 alias grep='grep -n'
+alias less='cless'
 alias ll='ls -laghFG'
 alias mkdir='mkdir -pv'
 alias path='echo -e ${PATH//:/\\n}'

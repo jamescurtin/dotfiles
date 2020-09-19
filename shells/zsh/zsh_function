@@ -4,7 +4,20 @@ if [[ -n $SSH_CONNECTION ]] && [ -z ${TMUX+x} ]; then
 fi
 }
 
+activate_powerline() {
+    powerline-daemon -q
+    powerline_zsh=$(pip show powerline-status | sed -n -e 's/^.*Location: //p')/powerline/bindings/zsh/powerline.zsh
+    . $powerline_zsh
+}
 
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+function gpg_restart {
+  pkill gpg
+  pkill pinentry
+  pkill ssh-agent
+  eval $(gpg-agent --daemon --enable-ssh-support) }
+
+activate_gpg() {
+    export GPG_TTY="$(tty)"
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+    gpgconf --launch gpg-agent
+    }

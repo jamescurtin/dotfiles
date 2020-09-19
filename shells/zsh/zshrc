@@ -1,8 +1,6 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+export HOMEBREW_NO_ANALYTICS=1
 
 ZSH_THEME="mortalscumbag"
 
@@ -39,7 +37,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 #ZSH_CUSTOM=~/.zsh_custom
@@ -49,19 +47,19 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  brew
+  colorize
+  direnv
   docker
   docker-compose
   git
-  git-flow
+  kubectl
+  httpie
+  gnu-utils
   gpg-agent
   osx
   pip
-  python
   ssh-agent
-  sudo
   tmux
-  vscode
   zsh-syntax-highlighting
 )
 
@@ -72,9 +70,10 @@ source $ZSH/oh-my-zsh.sh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export PATH="$HOME/bin:/usr/local/sbin:${GOPATH}/bin:${GOROOT}/bin:$PATH"
 
-powerline-daemon -q
-powerline_zsh=$(pip show powerline-status | sed -n -e 's/^.*Location: //p')/powerline/bindings/zsh/powerline.zsh
-. $powerline_zsh
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+activate_gpg
+activate_powerline
 activate_tmux

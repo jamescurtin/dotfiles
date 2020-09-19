@@ -1,8 +1,11 @@
-tap "homebrew/cask-versions"
 tap "homebrew/bundle"
+tap "homebrew/cask-drivers"
+tap "homebrew/cask-versions"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
+
+brew "dnscrypt-proxy", restart_service: true
 
 cask "balenaetcher"
 cask "calibre"
@@ -12,6 +15,8 @@ cask "mactex"
 cask "teamviewer"
 cask "vlc"
 cask "webtorrent"
+cask "yubico-authenticator"
+cask "yubico-yubikey-manager"
 
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "PDF Squeezer", id: 504700302

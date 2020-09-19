@@ -1,3 +1,4 @@
-
 - link:
-    ~/.iterm2/com.googlecode.iterm2.plist: terminals/iterm2/iterm2
+    ~/.iterm2/com.googlecode.iterm2.plist:
+      path: terminals/iterm2/iterm2
+      force: true

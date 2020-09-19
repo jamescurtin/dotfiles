@@ -23,6 +23,8 @@ fixed-list-mode
 no-comments
 # No version in signature
 no-emit-version
+# Disable banner
+no-greeting
 # Long hexidecimal key format
 keyid-format 0xlong
 # Display UID validity
@@ -40,3 +42,7 @@ no-symkey-cache
 throw-keyids
 # Enable smartcard
 use-agent
+# Verbose output
+verbose
+# Show expired subkeys
+list-options show-unusable-subkeys

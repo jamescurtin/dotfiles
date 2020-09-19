@@ -1,18 +1,13 @@
-tap "homebrew/cask-versions"
 tap "homebrew/bundle"
+tap "homebrew/cask-versions"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "microsoft/mssql-release"
-
 
 brew "freetds"
 brew "graphviz"
 brew "msodbcsql17"
-brew "mssql-tools"
-brew "openblas"
-brew "openldap"
-brew "r"
 brew "kubernetes-helm"
 
+cask "azure-data-studio"
 cask "dbeaver-community"

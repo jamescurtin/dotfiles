@@ -68,14 +68,14 @@ echo_install_status "Homebrew" "${HOMEBREW_INSTALLED:-0}"
 
 
 bootstrap_echo "Preparing to install brew packages."
-brew bundle --no-lock --file=Brewfile.base
+brew bundle --no-lock --file=../homebrew/Brewfile.base
 echo
 
 bootstrap_echo "Should the 'work' brew profile be installed?"
 echo
 select yn in Yes No; do
     case $yn in
-        Yes ) brew bundle --no-lock --file=Brewfile.work; echo; break;;
+        Yes ) brew bundle --no-lock --file=../homebrew/Brewfile.work; echo; break;;
         No ) printf "Skipping.\n\n"; break;;
     esac
 done
@@ -84,7 +84,7 @@ bootstrap_echo "Should the 'personal' brew profile be installed?"
 echo
 select yn in Yes No; do
     case $yn in
-        Yes ) brew bundle --no-lock --file=Brewfile.personal; echo; break;;
+        Yes ) brew bundle --no-lock --file=../homebrew/Brewfile.personal; echo; break;;
         No ) printf "Skipping.\n\n"; break;;
     esac
 done
@@ -113,18 +113,40 @@ if [[ ! -d "${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]]; then
 fi
 echo_install_status "zsh syntax highlighting" "${ZSH_SYNTAX_INSTALLED:-0}"
 
+PY_VERSION=$(pyenv install --list | sed 's/^  //' | grep '^\d' | grep --invert-match 'dev\|a\|b' | tail -1)
+AVAILABLE_PY_VERSIONS=$(pyenv versions)
+bootstrap_echo "Preparing to install python $PY_VERSION"
+if [[ $AVAILABLE_PY_VERSIONS =~ ${PY_VERSION} ]]; then
+  echo "python ${PY_VERSION} already installed!"
+else
+    LDFLAGS="-L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib" CPPFLAGS="-I$(brew --prefix zlib)/include -I$(brew --prefix bzip2)/include" pyenv install -v "${PY_VERSION}"
+fi
+pyenv global "${PY_VERSION}"
+
+
+bootstrap_echo "Preparing to install Python linting and testing packages"
+pip3 install -r ../python/requirements-test.txt > /dev/null 2>&1
+echo
 
 bootstrap_echo "Preparing to install powerline terminal status bar"
-pip3 install powerline-status
+pip3 install -r ../python/requirements-terminal.txt > /dev/null 2>&1
 echo
 
 
 bootstrap_echo "Preparing to install powerline-compatable fonts"
-FONTS_DIR="$(mktemp -d -t fonts.XXXXXX)"
-git clone https://github.com/powerline/fonts.git "${FONTS_DIR}" \
-    && ./"${FONTS_DIR}"/install.sh \
-    && rm -rf "${FONTS_DIR}"
-echo
+install_fonts() {
+    FONTS_DIR="$(mktemp -d -t fonts.XXXXXX)"
+    git clone https://github.com/powerline/fonts.git "${FONTS_DIR}" \
+        && ./"${FONTS_DIR}"/install.sh \
+        && rm -rf "${FONTS_DIR}"
+    echo
+}
+if ls -R "${HOME}"/Library/Fonts/*Powerline* > /dev/null; then
+    echo "Powerline fonts already installed"
+else
+    install_fonts
+fi
+
 
 bootstrap_echo "If you have a Yubikey available, you may set it up now. If so, please
 insert the yubikey before continuing."

@@ -40,7 +40,6 @@ The following steps will be need to taken separately:
 Install applications offline:
 * Lightroom
 * Cisco AnyConnect
-* Deedfinder
 * Picasa
 
 System settings:
