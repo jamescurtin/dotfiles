@@ -1,5 +1,7 @@
 # dotfiles
 
+![Linting](https://github.com/jamescurtin/dotfiles/workflows/Linting/badge.svg)
+
 This repo is optimized for MacOS, though it does have limited support for other operating systems.
 
 ## Full system configuration
