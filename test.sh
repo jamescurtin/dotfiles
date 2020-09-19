@@ -5,10 +5,10 @@ export SHELLCHECK_OPTS="-x -e SC2034 --shell=bash"
 shebangregex="^#! */[^ ]*/(env *)?[abkz]*sh"
 
 filepaths=()
-excludes=( ! -path *./.git/* )
-excludes+=( ! -path *.go )
-excludes+=( ! -path */mvnw )
-excludes+=( ! -path */meta/dotbot/* )
+excludes=(! -path *./.git/*)
+excludes+=(! -path *.go)
+excludes+=(! -path */mvnw)
+excludes+=(! -path */meta/dotbot/*)
 
 readarray -d '' filepaths < <(find . -type f "${excludes[@]}" \
     '(' \
@@ -39,7 +39,7 @@ readarray -d '' filepaths < <(find . -type f "${excludes[@]}" \
     -o -path '*/.profile' \
     -o -path '*/profile' \
     -o -name '*.shlib' \
-       ')'\
+    ')' \
     \
     -print0)
 
@@ -49,8 +49,11 @@ for file in "${tmp[@]}"; do
     filepaths+=("$file")
 done
 
-echo "::debug:: shellcheck ${filepaths[*]}"
+echo "Running shellcheck..."
 shellcheck "${filepaths[@]}"
+
+echo "Running shfmt..."
+shfmt -f . | grep -v meta/dotbot | xargs shfmt -l -w -s
 
 echo "Running yamllint..."
 yamllint .
