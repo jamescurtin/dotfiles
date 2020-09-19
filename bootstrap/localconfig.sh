@@ -4,9 +4,9 @@ set -eo pipefail
 # shellcheck source=bootstrap/messages.sh
 source messages.sh
 
-add_yubikey () {
+add_yubikey() {
     printf "Starting ssh-agent\n"
-    eval "$(ssh-agent -s)" &>/dev/null
+    eval "$(ssh-agent -s)" &> /dev/null
     mkdir -p "${HOME}"/.ssh
     if [[ ! -f "${HOME}/.ssh/id_rsa_yubikey.pub" ]]; then
         printf "Creating ~/.ssh/id_rsa_yubikey.pub\n\n"
@@ -16,9 +16,9 @@ add_yubikey () {
     else
         printf "File already exists: ~/.ssh/id_rsa_yubikey.pub. skipping...\n\n"
     fi
-    }
+}
 
-configure_local_gitconfig () {
+configure_local_gitconfig() {
     bootstrap_echo "Configuring local gitconfig options. This information will be used associated with your git commits."
     if [[ ! -f "${HOME}/.gitconfig.local" ]]; then
         touch "${HOME}/.gitconfig.local"
@@ -27,14 +27,20 @@ configure_local_gitconfig () {
         echo "Local gitconfig already exists. Do you want to overwrite it?"
         select yn in Yes No; do
             case $yn in
-                Yes ) prompt_local_gitconfig; break;;
-                No ) printf "Skipping...\n\n"; break;;
+                Yes)
+                    prompt_local_gitconfig
+                    break
+                    ;;
+                No)
+                    printf "Skipping...\n\n"
+                    break
+                    ;;
             esac
         done
     fi
 }
 
-configure_gpg_public_keys () {
+configure_gpg_public_keys() {
     bootstrap_echo "Importing GPG public keys"
     curl https://keybase.io/jameswcurtin/pgp_keys.asc | gpg --import
     KEYID=$(curl https://keybase.io/jameswcurtin/pgp_keys.asc | gpg --dry-run --import --import-options show-only --with-colons | awk -F: '/^pub:/ { print $5 }')
@@ -57,14 +63,20 @@ prompt_local_gitconfig() {
     printf "Is this correct?\n"
     select yn in Yes No Abort; do
         case $yn in
-            Yes ) break;;
-            No ) prompt_local_gitconfig; break;;
-            Abort ) echo "Skipping..."; return; break;;
+            Yes) break ;;
+            No)
+                prompt_local_gitconfig
+                break
+                ;;
+            Abort)
+                echo "Skipping..."
+                return
+                break
+                ;;
         esac
     done
 
-    printf \
-"[user]
+    printf "[user]
     name = %s
     email = %s
     signingkey = %s

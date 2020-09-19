@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-setup_macos_dock () {
+setup_macos_dock() {
     dockutil --no-restart --remove all
     dockutil --no-restart --add "/System/Applications/Calendar.app"
     dockutil --no-restart --add "/System/Applications/Messages.app"
@@ -105,10 +105,8 @@ setup_macos_preferences() {
     # in the login window
     sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
-
     # Don’t show recent applications in Dock
     defaults write com.apple.dock show-recents -bool false
-
 
     # Set machine sleep to 3 minutes on power
     sudo pmset -c sleep 3
