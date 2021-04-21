@@ -53,7 +53,6 @@ plugins=(
   docker-compose
   git
   kubectl
-  httpie
   gnu-utils
   gpg-agent
   osx

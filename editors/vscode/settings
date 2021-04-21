@@ -27,13 +27,10 @@
     "python.autoComplete.addBrackets": true,
     "python.formatting.provider": "black",
     "python.languageServer": "Pylance",
-    "python.linting.banditEnabled": true,
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.lintOnSave": true,
     "python.linting.mypyEnabled": true,
-    "python.linting.pycodestyleEnabled": true,
-    "python.linting.pydocstyleEnabled": true,
     "python.pythonPath": "python",
     "python.sortImports.args": [
         "-sl"
@@ -49,9 +46,29 @@
     "terminal.integrated.macOptionIsMeta": true,
     "terminal.integrated.shell.osx": "/bin/zsh",
     "window.nativeTabs": true,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "workbench.colorTheme": "Visual Studio Dark",
     "workbench.fontAliasing": "auto",
     "workbench.tree.horizontalScrolling": true,
-    "yaml.format.proseWrap": "always"
+    "yaml.format.proseWrap": "always",
+    "workbench.startupEditor": "newUntitledFile",
+    "python.analysis.completeFunctionParens": true,
+    "yaml.format.printWidth": 120,
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "XXX",
+        "[ ]",
+        "[x]"
+    ],
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "git.ignoreMissingGitWarning": true
 }
