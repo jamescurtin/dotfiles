@@ -70,5 +70,6 @@
             "filenamePattern": "*.ipynb"
         }
     ],
-    "git.ignoreMissingGitWarning": true
+    "git.ignoreMissingGitWarning": true,
+    "python.showStartPage": false
 }

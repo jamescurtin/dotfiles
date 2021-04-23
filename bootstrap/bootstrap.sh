@@ -72,7 +72,7 @@ fi
 echo_install_status "Homebrew" "${HOMEBREW_INSTALLED:-0}"
 
 bootstrap_echo "Preparing to install brew packages."
-brew bundle --no-lock --file=../homebrew/Brewfile.base
+brew bundle --verbose --no-lock --file=../homebrew/Brewfile.base
 echo
 
 bootstrap_echo "Should the 'work' brew profile be installed?"
@@ -80,7 +80,7 @@ echo
 select yn in Yes No; do
     case $yn in
         Yes)
-            brew bundle --no-lock --file=../homebrew/Brewfile.work
+            brew bundle --verbose --no-lock --file=../homebrew/Brewfile.work
             echo
             break
             ;;
@@ -96,7 +96,7 @@ echo
 select yn in Yes No; do
     case $yn in
         Yes)
-            brew bundle --no-lock --file=../homebrew/Brewfile.personal
+            brew bundle --verbose --no-lock --file=../homebrew/Brewfile.personal
             echo
             break
             ;;
@@ -150,7 +150,7 @@ bootstrap_echo "Preparing to install powerline-compatable fonts"
 install_fonts() {
     FONTS_DIR="$(mktemp -d -t fonts.XXXXXX)"
     git clone https://github.com/powerline/fonts.git "${FONTS_DIR}" &&
-        ./"${FONTS_DIR}"/install.sh &&
+        "${FONTS_DIR}"/install.sh &&
         rm -rf "${FONTS_DIR}"
     echo
 }

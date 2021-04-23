@@ -4,15 +4,25 @@ set -eo pipefail
 # shellcheck source=bootstrap/messages.sh
 source messages.sh
 
-add_yubikey() {
+activate_gpg() {
     printf "Starting ssh-agent\n"
     eval "$(ssh-agent -s)" &> /dev/null
+    tty="$(tty)"
+    ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
+    export GPG_TTY tty
+    export SSH_AUTH_SOCK ssh_auth_sock
+    gpgconf --launch gpg-agent
+}
+
+add_yubikey() {
+    activate_gpg
     mkdir -p "${HOME}"/.ssh
     if [[ ! -f "${HOME}/.ssh/id_rsa_yubikey.pub" ]]; then
         printf "Creating ~/.ssh/id_rsa_yubikey.pub\n\n"
         ssh-add -L | grep "cardno:" > ~/.ssh/id_rsa_yubikey.pub
         chmod 400 ~/.ssh/id_rsa_yubikey.pub
         git remote set-url origin git@github.com:jamescurtin/dotfiles.git
+        gpg --list-secret-keys
     else
         printf "File already exists: ~/.ssh/id_rsa_yubikey.pub. skipping...\n\n"
     fi

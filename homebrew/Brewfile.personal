@@ -1,5 +1,4 @@
 tap "homebrew/bundle"
-tap "homebrew/cask-drivers"
 tap "homebrew/cask-versions"
 tap "homebrew/cask"
 tap "homebrew/core"
@@ -15,8 +14,6 @@ cask "mactex"
 cask "teamviewer"
 cask "vlc"
 cask "webtorrent"
-cask "yubico-authenticator"
-cask "yubico-yubikey-manager"
 
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "PDF Squeezer", id: 504700302
