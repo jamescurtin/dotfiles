@@ -69,5 +69,9 @@
     },
     "git.ignoreMissingGitWarning": true,
     "python.showStartPage": false,
-    "redhat.telemetry.enabled": false
+    "redhat.telemetry.enabled": false,
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.mypy_cache": true
+    }
 }
