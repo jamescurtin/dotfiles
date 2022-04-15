@@ -10,7 +10,7 @@ activate_powerline() {
     . $powerline_zsh
 }
 
-function gpg_restart {
+gpg_restart() {
   pkill gpg
   pkill pinentry
   pkill ssh-agent
@@ -21,3 +21,8 @@ activate_gpg() {
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
     gpgconf --launch gpg-agent
     }
+
+activate_rvm() {
+    # shellcheck source=/dev/null
+    source "${HOME}"/.rvm/scripts/rvm
+}

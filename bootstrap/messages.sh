@@ -39,8 +39,6 @@ The following steps will be need to taken separately:
 
 Install applications offline:
 * Lightroom
-* Cisco AnyConnect
-* Picasa
 
 System settings:
 * Open iterm2 settings -> General -> Preferences and load settings from custom directory: '~/.iterm2/'

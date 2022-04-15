@@ -2,6 +2,8 @@
 set -eo pipefail
 
 setup_macos_dock() {
+    USE_WORK=$1
+    USE_PERSONAL=$2
     dockutil --no-restart --remove all
     dockutil --no-restart --add "/System/Applications/Calendar.app"
     dockutil --no-restart --add "/System/Applications/Messages.app"
@@ -11,8 +13,10 @@ setup_macos_dock() {
     dockutil --no-restart --add "/Applications/iTerm.app"
     dockutil --no-restart --add "/Applications/Spotify.app"
     dockutil --no-restart --add "/Applications/Sourcetree.app"
-    dockutil --no-restart --add "/Applications/Microsoft Word.app"
-    dockutil --no-restart --add "/Applications/Microsoft Excel.app"
+    if [ "${USE_PERSONAL}" == 1 ]; then
+        dockutil --no-restart --add "/Applications/Microsoft Word.app"
+        dockutil --no-restart --add "/Applications/Microsoft Excel.app"
+    fi
     dockutil --no-restart --add "/Applications/Slack.app"
     dockutil --no-restart --add "/Applications/Visual Studio Code.app"
     killall Dock

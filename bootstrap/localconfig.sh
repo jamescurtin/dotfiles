@@ -56,6 +56,12 @@ configure_gpg_public_keys() {
     KEYID=$(curl https://keybase.io/jameswcurtin/pgp_keys.asc | gpg --dry-run --import --import-options show-only --with-colons | awk -F: '/^pub:/ { print $5 }')
 }
 
+configure_rvm() {
+    curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+    curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+    curl -sSL https://get.rvm.io | bash -s stable --ruby
+}
+
 prompt_local_gitconfig() {
     printf "\e[96mEnter your name\n\e[0m"
     read -r -p "> " NAME

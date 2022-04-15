@@ -5,6 +5,7 @@ tap "homebrew/core"
 tap "homebrew/services"
 
 brew "dnscrypt-proxy", restart_service: true
+brew "doctl"
 
 cask "balenaetcher"
 cask "calibre"

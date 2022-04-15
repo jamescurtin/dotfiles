@@ -2,3 +2,5 @@ alias ll='ls -laghFG'
 alias cd..='cd ..'
 
 alias reload='source ~/.bash_profile'
+
+complete -C /usr/local/bin/terraform terraform
