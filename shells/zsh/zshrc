@@ -47,17 +47,25 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  alias-finder
+  bazel
   colorize
   direnv
   docker
   docker-compose
+  doctl
   git
-  kubectl
   gnu-utils
+  golang
   gpg-agent
-  osx
+  kubectl
+  macos
   pip
+  pyenv
+  ruby
+  rvm
   ssh-agent
+  terraform
   tmux
   zsh-syntax-highlighting
 )
@@ -71,10 +79,9 @@ export SSH_KEY_PATH="${HOME}/.ssh/rsa_id"
 export GOPATH="${HOME}/.go"
 GOROOT="$(brew --prefix golang)/libexec"
 export GOROOT
-export PATH="$HOME/bin:/usr/local/sbin:${GOPATH}/bin:${GOROOT}/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/sbin:${GOPATH}/bin:${GOROOT}/bin:$PATH:$HOME/.rvm/bin"
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 activate_gpg
 activate_powerline
 activate_tmux
+activate_rvm

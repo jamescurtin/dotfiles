@@ -48,6 +48,37 @@ while true; do
     kill -0 "$$" || exit
 done 2> /dev/null &
 
+USE_PERSONAL=0
+USE_WORK=0
+
+bootstrap_echo "Should the 'personal' profile be installed?"
+echo
+select yn in Yes No; do
+    case $yn in
+        Yes)
+            USE_PERSONAL=1
+            break
+            ;;
+        No)
+            break
+            ;;
+    esac
+done
+
+bootstrap_echo "Should the 'work' profile be installed?"
+echo
+select yn in Yes No; do
+    case $yn in
+        Yes)
+            USE_WORK=1
+            break
+            ;;
+        No)
+            break
+            ;;
+    esac
+done
+
 bootstrap_echo "Should the computer attempt to update its software? If an update is
 available, it will be installed and \e[38;5;178myou cannot stop the process.\e[0m It may take a while."
 echo "Do you want to check for updates?"
@@ -75,37 +106,17 @@ bootstrap_echo "Preparing to install brew packages."
 brew bundle --verbose --no-lock --file=../homebrew/Brewfile.base
 echo
 
-bootstrap_echo "Should the 'work' brew profile be installed?"
-echo
-select yn in Yes No; do
-    case $yn in
-        Yes)
-            brew bundle --verbose --no-lock --file=../homebrew/Brewfile.work
-            echo
-            break
-            ;;
-        No)
-            printf "Skipping.\n\n"
-            break
-            ;;
-    esac
-done
+if [ "${USE_WORK}" == "1" ]; then
+    echo "Installing work brew packages"
+    brew bundle --verbose --no-lock --file=../homebrew/Brewfile.work
+    echo
+fi
 
-bootstrap_echo "Should the 'personal' brew profile be installed?"
-echo
-select yn in Yes No; do
-    case $yn in
-        Yes)
-            brew bundle --verbose --no-lock --file=../homebrew/Brewfile.personal
-            echo
-            break
-            ;;
-        No)
-            printf "Skipping.\n\n"
-            break
-            ;;
-    esac
-done
+if [ "${USE_PERSONAL}" == "1" ]; then
+    echo "Installing personal brew packages"
+    brew bundle --verbose --no-lock --file=../homebrew/Brewfile.personal
+    echo
+fi
 
 bootstrap_echo "Preparing to install oh-my-zsh"
 if [[ ${ZSH} != *".oh-my-zsh"* ]]; then
@@ -160,9 +171,11 @@ else
     install_fonts
 fi
 
-if ! command -v shfmt &> /dev/null; then
-    bootstrap_echo "Installing shfmt"
-    GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+bootstrap_echo "Preparing to install rvm"
+if ! command -v rvm &> /dev/null; then
+    configure_rvm
+else
+    echo "rvm is already installed."
 fi
 
 bootstrap_echo "If you have a Yubikey available, you may set it up now. If so, please
@@ -183,7 +196,7 @@ done
 
 if [[ ${OS} == "mac" ]]; then
     bootstrap_echo "Setting up macOS Dock icons."
-    setup_macos_dock
+    setup_macos_dock "${USE_WORK}" "${USE_PERSONAL}"
     printf "\e[92mSuccess!\n\n\e[0m"
 
     bootstrap_echo "Setting up macOS System preferences."
