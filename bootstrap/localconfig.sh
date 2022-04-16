@@ -62,6 +62,27 @@ configure_rvm() {
     curl -sSL https://get.rvm.io | bash -s stable --ruby
 }
 
+install_vscode_extensions_from_file() {
+    filename=$1
+    while read -r line; do
+        code --install-extension "${line}"
+    done < "${filename}"
+}
+
+configure_vscode_extensions() {
+    rootdir=$(dirname "$(pwd)")
+    USE_WORK=$1
+    USE_PERSONAL=$2
+
+    install_vscode_extensions_from_file "${rootdir}/vscode/extensions.base"
+    if [ "${USE_PERSONAL}" == 1 ]; then
+        install_vscode_extensions_from_file "${rootdir}/vscode/extensions.personal"
+    fi
+    if [ "${USE_WORK}" == 1 ]; then
+        install_vscode_extensions_from_file "${rootdir}/vscode/extensions.work"
+    fi
+}
+
 prompt_local_gitconfig() {
     printf "\e[96mEnter your name\n\e[0m"
     read -r -p "> " NAME
