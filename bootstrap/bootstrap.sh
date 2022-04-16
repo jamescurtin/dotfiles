@@ -118,6 +118,10 @@ if [ "${USE_PERSONAL}" == "1" ]; then
     echo
 fi
 
+bootstrap_echo "Final homebrew cleanup"
+brew autoremove
+brew cleanup
+
 bootstrap_echo "Preparing to install oh-my-zsh"
 if [[ ${ZSH} != *".oh-my-zsh"* ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -203,6 +207,9 @@ if [[ ${OS} == "mac" ]]; then
     setup_macos_preferences
     printf "\e[92mSuccess!\n\n\e[0m"
 fi
+
+bootstrap_echo "Installing VSCode Extensions."
+configure_vscode_extensions "${USE_WORK}" "${USE_PERSONAL}"
 
 bootstrap_echo "Installing dotfiles."
 "${HOME}"/repos/dotfiles/install-profile "${OS}"

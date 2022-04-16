@@ -83,7 +83,6 @@
 	autocrlf = false
 	preloadindex = true
 	fscache = true
-	symlinks = false
 	excludesfile = ~/.gitignore_global
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [pull]

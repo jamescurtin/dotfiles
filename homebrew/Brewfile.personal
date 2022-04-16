@@ -6,12 +6,13 @@ tap "homebrew/services"
 
 brew "dnscrypt-proxy", restart_service: true
 brew "doctl"
+brew "hugo"
+brew "paperkey"
 
 cask "balenaetcher"
 cask "calibre"
 cask "dropbox"
 cask "keybase"
-cask "mactex"
 cask "teamviewer"
 cask "vlc"
 cask "webtorrent"

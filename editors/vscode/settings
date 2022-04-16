@@ -32,6 +32,8 @@
     "python.linting.lintOnSave": true,
     "python.linting.mypyEnabled": true,
     "python.pythonPath": "python",
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.pydocstyleEnabled": true,
     "python.sortImports.args": [
         "-sl"
     ],
@@ -72,6 +74,25 @@
     "redhat.telemetry.enabled": false,
     "files.exclude": {
         "**/__pycache__": true,
+        "**/.pytest_cache": true,
         "**/.mypy_cache": true
-    }
+    },
+    "python.analysis.completeFunctionParens": true,
+    "terminal.integrated.tabs.enabled": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false
+    },
+    "cSpell.userWords": [
+        "kubectl"
+    ]
 }
