@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+export HOMEBREW_NO_ENV_HINTS=1
+
 # For when script is invoked via curl. Makes sure full repo is available.
 printf "Preparing to download dotfiles repo...\n\n"
 if [[ ! -d "${HOME}/repos/dotfiles" ]]; then
@@ -37,8 +39,11 @@ if [[ ! ${OS:-unsupported} =~ ^(mac|linux)$ ]]; then
     exit 1
 fi
 
+# Prevent accidentally typing password at this point
+stty -echo
 bootstrap_echo "You will need to type your password to continue."
 wait_for_user
+stty echo
 sudo -v
 printf "\e[92mSuccess!\n\n\e[0m"
 # Keep-alive: update existing `sudo` time stamp until bootstrap has finished
@@ -123,6 +128,7 @@ brew autoremove
 brew cleanup
 
 bootstrap_echo "Preparing to install oh-my-zsh"
+mkdir -p "${HOME}"/.zfunc
 if [[ ${ZSH} != *".oh-my-zsh"* ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     OH_MY_ZSH_INSTALLED=1
@@ -156,6 +162,18 @@ pyenv global "${PY_VERSION}"
 bootstrap_echo "Preparing to install Python linting and testing packages"
 pip3 install -r ../python/requirements-test.txt > /dev/null 2>&1
 echo
+
+bootstrap_echo "Preparing to install rust"
+if ! command -v rustc &> /dev/null; then
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
+else
+    echo "rust already installed!"
+fi
+
+bootstrap_echo "Installing rust autocomplete"
+# shellcheck source=/dev/null
+source "${HOME}"/.cargo/env
+rustup completions zsh > ~/.zfunc/_rustup
 
 bootstrap_echo "Preparing to install powerline terminal status bar"
 pip3 install -r ../python/requirements-terminal.txt > /dev/null 2>&1

@@ -3,6 +3,7 @@ davidanson.vscode-markdownlint
 donjayamanne.githistory
 golang.go
 hashicorp.terraform
+hashicorp.terraform
 lextudio.restructuredtext
 ms-azuretools.vscode-docker
 ms-kubernetes-tools.vscode-kubernetes-tools
@@ -14,4 +15,5 @@ ms-vscode.cpptools
 njpwerner.autodocstring
 redhat.vscode-yaml
 streetsidesoftware.code-spell-checker
+technosophos.vscode-helm
 yzhang.markdown-all-in-one
