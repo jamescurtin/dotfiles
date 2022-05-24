@@ -42,6 +42,7 @@ Install applications offline:
 
 System settings:
 * Open iterm2 settings -> General -> Preferences and load settings from custom directory: '~/.iterm2/'
+* TODO: RAYCAST
 "
 }
 
