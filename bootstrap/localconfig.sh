@@ -107,7 +107,6 @@ prompt_local_gitconfig() {
                 ;;
             Abort)
                 echo "Skipping..."
-                return
                 break
                 ;;
         esac
