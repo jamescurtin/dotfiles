@@ -1,23 +1,25 @@
-tap "homebrew/bundle"
-tap "homebrew/cask-versions"
-tap "homebrew/cask"
-tap "homebrew/core"
-tap "homebrew/services"
+instance_eval(File.read("#{ENV['HOME']}/repos/dotfiles/homebrew/brewfile.base"))
 
-brew "dnscrypt-proxy", restart_service: true
 brew "doctl"
+brew "ghostscript"
 brew "hugo"
 brew "paperkey"
+brew "tailscale"
 
+cask "adobe-creative-cloud"
 cask "balenaetcher"
+cask "bartender"
 cask "calibre"
 cask "dropbox"
+cask "elgato-camera-hub"
+cask "elgato-control-center"
+cask "elgato-stream-deck"
+cask "elgato-wave-link"
 cask "keybase"
 cask "teamviewer"
 cask "vlc"
 cask "webtorrent"
 
-mas "Microsoft Remote Desktop", id: 1295203466
-mas "PDF Squeezer", id: 504700302
 mas "Pixelmator", id: 407963104
 mas "TNEF's Enough", id: 986621173
+mas "Tailscale", id: 1475387142

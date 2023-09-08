@@ -102,13 +102,12 @@ done
 
 bootstrap_echo "Preparing to install Homebrew 🍺"
 if ! command -v brew &> /dev/null; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     HOMEBREW_INSTALLED=1
 fi
 echo_install_status "Homebrew" "${HOMEBREW_INSTALLED:-0}"
 
 bootstrap_echo "Preparing to install brew packages."
-brew bundle --verbose --no-lock --file=../homebrew/Brewfile.base
 echo
 
 if [ "${USE_WORK}" == "1" ]; then
@@ -120,6 +119,12 @@ fi
 if [ "${USE_PERSONAL}" == "1" ]; then
     echo "Installing personal brew packages"
     brew bundle --verbose --no-lock --file=../homebrew/Brewfile.personal
+    echo
+fi
+
+if [ "${USE_PERSONAL}" != "1" ] && [ "${USE_WORK}" != "1" ]; then
+    echo "Installing base brew packages"
+    brew bundle --verbose --no-lock --file=../homebrew/Brewfile.base
     echo
 fi
 
@@ -144,12 +149,12 @@ echo_install_status "tmux plugin manager" "${TMUX_PLUGINS_INSTALLED:-0}"
 
 bootstrap_echo "Preparing to install zsh syntax highlighting"
 if [[ ! -d "${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]]; then
-    git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     ZSH_SYNTAX_INSTALLED=1
 fi
 echo_install_status "zsh syntax highlighting" "${ZSH_SYNTAX_INSTALLED:-0}"
 
-PY_VERSION=$(pyenv install --list | sed 's/^  //' | grep '^\d' | grep --invert-match 'dev\|a\|b' | tail -1)
+PY_VERSION=$(pyenv install --list | sed 's/^  //' | grep '^\d' | grep --invert-match 'dev\|a\|b\|rc' | tail -1)
 AVAILABLE_PY_VERSIONS=$(pyenv versions)
 bootstrap_echo "Preparing to install python $PY_VERSION"
 if [[ $AVAILABLE_PY_VERSIONS =~ ${PY_VERSION} ]]; then
@@ -191,13 +196,6 @@ if ls -R "${HOME}"/Library/Fonts/*Powerline* > /dev/null; then
     echo "Powerline fonts already installed"
 else
     install_fonts
-fi
-
-bootstrap_echo "Preparing to install rvm"
-if ! command -v rvm &> /dev/null; then
-    configure_rvm
-else
-    echo "rvm is already installed."
 fi
 
 bootstrap_echo "If you have a Yubikey available, you may set it up now. If so, please

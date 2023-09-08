@@ -1,16 +1,4 @@
-tap "homebrew/bundle"
-tap "homebrew/cask-versions"
-tap "homebrew/cask"
-tap "homebrew/core"
-tap "homebrew/services"
+instance_eval(File.read("#{ENV['HOME']}/repos/dotfiles/homebrew/brewfile.base"))
 
-brew "bazelisk"
 brew "dive"
-brew "graphviz"
 brew "hadolint"
-brew "kompose"
-brew "kubectl"
-brew "node"
-brew "ruby"
-
-cask "dbeaver-community"

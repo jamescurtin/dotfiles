@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2155
 set -eo pipefail
 
 # shellcheck source=bootstrap/messages.sh
@@ -6,11 +7,8 @@ source messages.sh
 
 activate_gpg() {
     printf "Starting ssh-agent\n"
-    eval "$(ssh-agent -s)" &> /dev/null
-    tty="$(tty)"
-    ssh_auth_sock=$(gpgconf --list-dirs agent-ssh-socket)
-    export GPG_TTY tty
-    export SSH_AUTH_SOCK ssh_auth_sock
+    export GPG_TTY="$(tty)"
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
     gpgconf --launch gpg-agent
 }
 
@@ -54,12 +52,6 @@ configure_gpg_public_keys() {
     bootstrap_echo "Importing GPG public keys"
     curl https://keybase.io/jameswcurtin/pgp_keys.asc | gpg --import
     KEYID=$(curl https://keybase.io/jameswcurtin/pgp_keys.asc | gpg --dry-run --import --import-options show-only --with-colons | awk -F: '/^pub:/ { print $5 }')
-}
-
-configure_rvm() {
-    curl -sSL https://rvm.io/mpapis.asc | gpg --import -
-    curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
-    curl -sSL https://get.rvm.io | bash -s stable --ruby
 }
 
 install_vscode_extensions_from_file() {

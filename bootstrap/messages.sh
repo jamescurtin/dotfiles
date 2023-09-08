@@ -37,9 +37,6 @@ print_exit_success() {
 \e[0m
 The following steps will be need to taken separately:
 
-Install applications offline:
-* Lightroom
-
 System settings:
 * Open iterm2 settings -> General -> Preferences and load settings from custom directory: '~/.iterm2/'
 * TODO: RAYCAST

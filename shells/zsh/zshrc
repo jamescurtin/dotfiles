@@ -63,7 +63,6 @@ plugins=(
   pip
   pyenv
   ruby
-  rvm
   ssh-agent
   terraform
   tmux
@@ -81,13 +80,19 @@ export SSH_KEY_PATH="${HOME}/.ssh/rsa_id"
 export GOPATH="${HOME}/.go"
 GOROOT="$(brew --prefix golang)/libexec"
 export GOROOT
-export PATH="$PATH:$HOME/bin:/usr/local/sbin:${GOPATH}/bin:${GOROOT}/bin:$HOME/.rvm/bin:$HOME/.cargo/bin"
+export PATH="/opt/homebrew/bin:$HOME/bin:/usr/local/sbin:${GOPATH}/bin:${GOROOT}/bin:$HOME/.cargo/bin:$PATH"
 
 activate_gpg
 activate_powerline
 activate_tmux
-activate_rvm
 activate_rust
 
-fpath+=~/.zfunc
-compinit
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
