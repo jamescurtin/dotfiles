@@ -80,7 +80,7 @@ export SSH_KEY_PATH="${HOME}/.ssh/rsa_id"
 export GOPATH="${HOME}/.go"
 GOROOT="$(brew --prefix golang)/libexec"
 export GOROOT
-export PATH="/opt/homebrew/bin:$HOME/bin:/usr/local/sbin:${GOPATH}/bin:${GOROOT}/bin:$HOME/.cargo/bin:$PATH"
+export PATH="/opt/homebrew/bin:$HOME/bin:/usr/local/sbin:${GOPATH}/bin:${GOROOT}/bin:$HOME/.cargo/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 activate_gpg
 activate_powerline

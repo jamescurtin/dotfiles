@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+BOOTSTRAP_SHA=$(sha256sum "${SCRIPT_DIR}/../bootstrap/bootstrap.sh" | awk '{ print $1 }')
+# shellcheck disable=SC2016
+sed -i -e 's/\(sha256 checksum: `\)\(.*\)\(`\)/\1'"${BOOTSTRAP_SHA}"'\3/g' "${SCRIPT_DIR}/../README.md"
