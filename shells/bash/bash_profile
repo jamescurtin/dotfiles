@@ -6,3 +6,5 @@ alias reload='source ~/.bash_profile'
 complete -C /usr/local/bin/terraform terraform
 # shellcheck source=/dev/null
 . "$HOME/.cargo/env"
+
+complete -C /opt/homebrew/bin/terraform terraform

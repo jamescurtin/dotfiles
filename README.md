@@ -18,7 +18,7 @@ To run as a one-liner:
 ```bash
 $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/jamescurtin/dotfiles/master/bootstrap/bootstrap.sh)"
 ```
-(sha256 checksum: `787f2d5cdd606e86899e75479aa2415444fa6a44c5e945e9dfe43a2e383737e2`: all commits to this repository will be signed.)
+(sha256 checksum: `58fd67f24090858e3aa6095c0a1ef441f7b6252a5cbbb57d38abdcb89ef1cd86`: all commits to this repository will be signed.)
 
 
 ## Dotfile Installation

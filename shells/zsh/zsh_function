@@ -22,11 +22,6 @@ activate_gpg() {
     gpgconf --launch gpg-agent
     }
 
-activate_rvm() {
-    # shellcheck source=/dev/null
-    source "${HOME}"/.rvm/scripts/rvm
-}
-
 activate_rust() {
     # shellcheck source=/dev/null
     source "${HOME}"/.cargo/env
