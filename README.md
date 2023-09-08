@@ -36,8 +36,15 @@ $ cd ~/repos/dotfiles
 ./install-profile mac
 ```
 
-## Testing
+## Developing and Testing
+
+If you update the `bootstrap/bootstrap.sh` file, you must also run
 
 ```bash
-$ ./test.sh
+bin/update-bootstrap-sha
+```
+
+To run all lints and tests:
+```bash
+bin/test
 ```

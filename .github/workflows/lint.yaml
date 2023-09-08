@@ -38,3 +38,12 @@ jobs:
         run: GO111MODULE=on go install mvdan.cc/sh/v3/cmd/shfmt@latest
       - name: Check formatting
         run: shfmt -f . | grep -v meta/dotbot | xargs shfmt -s -d
+  correct-sha256:
+    name: SHA256 in README is correct
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Update SHA script
+        run: bin/update-bootstrap-sha
+      - name: Check that there is no diff
+        run: git diff --exit-code
