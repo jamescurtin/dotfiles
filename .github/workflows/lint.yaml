@@ -6,7 +6,7 @@ jobs:
     name: Run yaml linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Configure Python 3.8
         uses: actions/setup-python@v5
         with:
@@ -19,7 +19,7 @@ jobs:
     name: Shellcheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@00b27aa7cb85167568cb48a3838b75f4265f2bca
         with:
@@ -30,7 +30,7 @@ jobs:
     name: Shell format
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-go@v5
         with:
           go-version: 1.26.x
@@ -42,7 +42,7 @@ jobs:
     name: SHA256 in README is correct
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run Update SHA script
         run: bin/update-bootstrap-sha
       - name: Check that there is no diff
