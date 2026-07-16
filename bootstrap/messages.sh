@@ -2,7 +2,7 @@
 set -eo pipefail
 
 print_welcome_message() {
-    printf "\e[92m
+	printf "\e[92m
 ****************************************************
 *  __        __   _                          _     *
 *  \ \      / /__| | ___ ___  _ __ ___   ___| |    *
@@ -25,7 +25,7 @@ anything else on your system.
 }
 
 print_exit_success() {
-    printf "\e[92m
+	printf "\e[92m
 *****************************************
 *   ____                                *
 *  / ___| _   _  ___ ___ ___  ___ ___   *
@@ -44,26 +44,26 @@ System settings:
 }
 
 print_exit_warning() {
-    bootstrap_echo "This program exited with an error. It is idempotent, so you may safely
+	bootstrap_echo "This program exited with an error. It is idempotent, so you may safely
 run it again.
 "
 }
 
 wait_for_user() {
-    read -r -p "Press enter to continue:"
+	read -r -p "Press enter to continue:"
 }
 
 bootstrap_echo() {
-    local fmt="$1"
-    shift
-    # shellcheck disable=SC2059
-    printf "\e[93m[Bootstrapper]\e[0m $fmt\\n" "$@"
+	local fmt="$1"
+	shift
+	# shellcheck disable=SC2059
+	printf "\e[93m[Bootstrapper]\e[0m $fmt\\n" "$@"
 }
 
 echo_install_status() {
-    if [[ $2 == 1 ]]; then
-        printf "\n\e[92mSuccess!\e[0m %s installed\n\n" "$1"
-    else
-        printf "%s is already installed.\n\n" "$1"
-    fi
+	if [[ $2 == 1 ]]; then
+		printf "\n\e[92mSuccess!\e[0m %s installed\n\n" "$1"
+	else
+		printf "%s is already installed.\n\n" "$1"
+	fi
 }

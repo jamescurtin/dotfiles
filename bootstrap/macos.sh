@@ -2,119 +2,119 @@
 set -eo pipefail
 
 setup_macos_dock() {
-    USE_WORK=$1
-    USE_PERSONAL=$2
-    dockutil --no-restart --remove all
-    dockutil --no-restart --add "/System/Applications/Calendar.app"
-    dockutil --no-restart --add "/System/Applications/Messages.app"
-    dockutil --no-restart --add "/Applications/Google Chrome.app"
-    dockutil --no-restart --add "/Applications/Firefox.app"
-    dockutil --no-restart --add "/System/Applications/System Settings.app"
-    dockutil --no-restart --add "/Applications/iTerm.app"
-    dockutil --no-restart --add "/Applications/Spotify.app"
-    dockutil --no-restart --add "/Applications/Sourcetree.app"
-    if [ "${USE_PERSONAL}" == 1 ]; then
-        dockutil --no-restart --add "/Applications/Microsoft Word.app"
-        dockutil --no-restart --add "/Applications/Microsoft Excel.app"
-    fi
-    dockutil --no-restart --add "/Applications/Slack.app"
-    dockutil --no-restart --add "/Applications/Visual Studio Code.app"
-    killall Dock
+	USE_WORK=$1
+	USE_PERSONAL=$2
+	dockutil --no-restart --remove all
+	dockutil --no-restart --add "/System/Applications/Calendar.app"
+	dockutil --no-restart --add "/System/Applications/Messages.app"
+	dockutil --no-restart --add "/Applications/Google Chrome.app"
+	dockutil --no-restart --add "/Applications/Firefox.app"
+	dockutil --no-restart --add "/System/Applications/System Settings.app"
+	dockutil --no-restart --add "/Applications/iTerm.app"
+	dockutil --no-restart --add "/Applications/Spotify.app"
+	dockutil --no-restart --add "/Applications/Sourcetree.app"
+	if [ "${USE_PERSONAL}" == 1 ]; then
+		dockutil --no-restart --add "/Applications/Microsoft Word.app"
+		dockutil --no-restart --add "/Applications/Microsoft Excel.app"
+	fi
+	dockutil --no-restart --add "/Applications/Slack.app"
+	dockutil --no-restart --add "/Applications/Visual Studio Code.app"
+	killall Dock
 }
 
 setup_macos_preferences() {
-    osascript -e 'tell application "System Preferences" to quit'
+	osascript -e 'tell application "System Preferences" to quit'
 
-    # Trackpad: enable tap to click for this user and for the login screen
-    sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-    defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-    defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+	# Trackpad: enable tap to click for this user and for the login screen
+	sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+	defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+	defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+	defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-    # Trackpad: map bottom right corner to right-click
-    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 1
-    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool false
-    defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 3
-    defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+	# Trackpad: map bottom right corner to right-click
+	defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 1
+	defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool false
+	defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 3
+	defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
-    # Enable “natural” (Lion-style) scrolling
-    defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
+	# Enable “natural” (Lion-style) scrolling
+	defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
-    # Use scroll gesture with the Ctrl (^) modifier key to zoom
-    sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-    sudo defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+	# Use scroll gesture with the Ctrl (^) modifier key to zoom
+	sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+	sudo defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
 
-    # Follow the keyboard focus while zoomed in
-    sudo defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+	# Follow the keyboard focus while zoomed in
+	sudo defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
-    # Set 24 hour clock
-    defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d  H:mm:ss'
+	# Set 24 hour clock
+	defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d  H:mm:ss'
 
-    # Require password immediately after sleep or screen saver begins
-    defaults write com.apple.screensaver askForPassword -int 1
-    defaults write com.apple.screensaver askForPasswordDelay -int 0
+	# Require password immediately after sleep or screen saver begins
+	defaults write com.apple.screensaver askForPassword -int 1
+	defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-    # Finder: show all filename extensions
-    defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+	# Finder: show all filename extensions
+	defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-    # Finder: show status bar
-    defaults write com.apple.finder ShowStatusBar -bool true
+	# Finder: show status bar
+	defaults write com.apple.finder ShowStatusBar -bool true
 
-    # Finder: show path bar
-    defaults write com.apple.finder ShowPathbar -bool true
+	# Finder: show path bar
+	defaults write com.apple.finder ShowPathbar -bool true
 
-    # Use column view in all Finder windows by default
-    defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+	# Use column view in all Finder windows by default
+	defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
-    # Enable highlight hover effect for the grid view of a stack (Dock)
-    defaults write com.apple.dock mouse-over-hilite-stack -bool true
+	# Enable highlight hover effect for the grid view of a stack (Dock)
+	defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
-    # Enable hotcorners
-    defaults write com.apple.dock wvous-tl-corner -int 10
-    defaults write com.apple.dock wvous-tl-modifier -int 0
+	# Enable hotcorners
+	defaults write com.apple.dock wvous-tl-corner -int 10
+	defaults write com.apple.dock wvous-tl-modifier -int 0
 
-    # Check for software updates daily, not just once per week
-    defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+	# Check for software updates daily, not just once per week
+	defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
-    # Download newly available updates in background
-    defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+	# Download newly available updates in background
+	defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 
-    # Install System data files & security updates
-    defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+	# Install System data files & security updates
+	defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 
-    # Automatically download apps purchased on other Macs
-    defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
+	# Automatically download apps purchased on other Macs
+	defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
 
-    # Turn on app auto-update
-    defaults write com.apple.commerce AutoUpdate -bool true
+	# Turn on app auto-update
+	defaults write com.apple.commerce AutoUpdate -bool true
 
-    # Prevent Photos from opening automatically when devices are plugged in
-    defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+	# Prevent Photos from opening automatically when devices are plugged in
+	defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
-    # Dark mode
-    sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true
+	# Dark mode
+	sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true
 
-    # Set strict firewall
-    sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 2
+	# Set strict firewall
+	sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 2
 
-    # Expand save panel by default
-    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+	# Expand save panel by default
+	defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+	defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
-    # Expand print panel by default
-    defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-    defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+	# Expand print panel by default
+	defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+	defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-    # Reveal IP address, hostname, OS version, etc. when clicking the clock
-    # in the login window
-    sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+	# Reveal IP address, hostname, OS version, etc. when clicking the clock
+	# in the login window
+	sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
-    # Don’t show recent applications in Dock
-    defaults write com.apple.dock show-recents -bool false
+	# Don’t show recent applications in Dock
+	defaults write com.apple.dock show-recents -bool false
 
-    # Set machine sleep to 3 minutes on power
-    sudo pmset -c sleep 3
+	# Set machine sleep to 3 minutes on power
+	sudo pmset -c sleep 3
 
-    # Set machine sleep to 2 minutes on battery
-    sudo pmset -b sleep 2
+	# Set machine sleep to 2 minutes on battery
+	sudo pmset -b sleep 2
 }
