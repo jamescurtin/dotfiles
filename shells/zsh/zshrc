@@ -1,8 +1,10 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# $USER rather than p10k's ${(%):-%n}: same value, and shellcheck can parse it.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh" ]]; then
+  # shellcheck source=/dev/null
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh"
 fi
 
 # Path to your oh-my-zsh installation.
@@ -111,9 +113,10 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 command -v mise &>/dev/null && eval "$(mise completion zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# shellcheck source=/dev/null
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Leave a deleted cwd (for example a reaped worktree) before the next prompt,
 # so pyenv shims and getcwd do not fail in a directory that no longer exists.
-_cd_home_if_cwd_gone() { [[ -d $PWD ]] || builtin cd "$HOME" 2>/dev/null; }
+_cd_home_if_cwd_gone() { [[ -d $PWD ]] || builtin cd "$HOME" 2>/dev/null || return; }
 precmd_functions+=(_cd_home_if_cwd_gone)
