@@ -95,7 +95,6 @@ export PATH="/opt/homebrew/bin:$HOME/bin:/usr/local/sbin:${GOPATH}/bin:${GOROOT}
 export PATH="$HOME/.local/bin:$PATH"
 
 activate_gpg
-# activate_powerline  # disabled: powerline-status 2.7 is incompatible with Python 3.14; using powerlevel10k instead
 activate_tmux
 activate_rust
 

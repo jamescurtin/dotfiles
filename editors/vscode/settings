@@ -96,6 +96,5 @@
         "kubectl"
     ],
     "yaml.disableSchemaDetection": [],
-    "python.defaultInterpreterPath": "/Users/jamescurtin/Desktop/venv",
     "docker.extension.enableComposeLanguageServer": false
 }
