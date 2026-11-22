@@ -1,8 +1,17 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# $USER rather than p10k's ${(%):-%n}: same value, and shellcheck can parse it.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh" ]]; then
+  # shellcheck source=/dev/null
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 export HOMEBREW_NO_ANALYTICS=1
 
-ZSH_THEME="mortalscumbag"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -82,8 +91,10 @@ GOROOT="$(brew --prefix golang)/libexec"
 export GOROOT
 export PATH="/opt/homebrew/bin:$HOME/bin:/usr/local/sbin:${GOPATH}/bin:${GOROOT}/bin:$HOME/.cargo/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
+# ~/.local/bin holds user-installed CLIs (e.g. the Claude Code native installer)
+export PATH="$HOME/.local/bin:$PATH"
+
 activate_gpg
-activate_powerline
 activate_tmux
 activate_rust
 
@@ -96,3 +107,15 @@ fi
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# mise task/tool completion (requires compinit above)
+command -v mise &>/dev/null && eval "$(mise completion zsh)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# shellcheck source=/dev/null
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Leave a deleted cwd (for example a reaped worktree) before the next prompt,
+# so pyenv shims and getcwd do not fail in a directory that no longer exists.
+_cd_home_if_cwd_gone() { [[ -d $PWD ]] || builtin cd "$HOME" 2>/dev/null || return; }
+precmd_functions+=(_cd_home_if_cwd_gone)

@@ -96,3 +96,14 @@
 	sslVerify = false
 [commit]
 	gpgsign = true
+[init]
+	defaultBranch = main
+[gpg]
+	format = openpgp
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+# Linked worktrees (agents) sign with the no-touch agent key. Must stay last:
+# it overrides gpg.format above.
+[includeIf "gitdir:**/.git/worktrees/**"]
+    path = ~/.config/git/agent-signing.inc

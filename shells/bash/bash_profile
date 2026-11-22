@@ -8,3 +8,6 @@ complete -C /usr/local/bin/terraform terraform
 . "$HOME/.cargo/env"
 
 complete -C /opt/homebrew/bin/terraform terraform
+
+# ~/.local/bin holds user-installed CLIs (Claude Code, Antigravity)
+export PATH="$HOME/.local/bin:$PATH"
